@@ -5,6 +5,7 @@
 set $mod Mod4
 
 #===autostart parograms===
+exec --no-startup-id ~/.config/i3/keymap
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
@@ -18,6 +19,7 @@ exec --no-startup-id nm-applet
 #exec --no-startup-id megasync
 #exec --no-startup-id redshift
 exec --no-startup-id blueman-applet
+#exec --no-startup-id redshift-gtk
 #exec --no-startup-id ss-qt5
 
 #===programs shortcuts===
@@ -37,7 +39,7 @@ bindsym $mod+slash exec xfce4-terminal --drop-down
 
 # printscreen--scrot(Print=PrtSc/PrintScreen)
  bindsym Print --release exec "scrot -s $HOME/Pictures/Screenshots/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
-bindsym Shift+Print exec "scrot /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
+bindsym Shift+Print exec "scrot -s /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
 
 # GUI file manager -- pcmanfm
 bindsym $mod+p exec --no-startup-id pcmanfm
@@ -59,7 +61,7 @@ smart_gaps on
 # new window
 new_window none
 new_float normal
-hide_edge_borders both
+#hide_edge_borders both
 
 # window colors
 #  class                 border   backgr.  text  indicator  child_border
@@ -75,27 +77,31 @@ for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 
 # float programs(find the programs'names in "/usr/share/applictions")
-for_window [class="Xfce4-terminal"] floating enable
 for_window [class="Gpicview"] floating enable
 for_window [class="mpv"] floating enable
 for_window [class="Gimp"] floating enable
 for_window [class="Xarchiver"] floating enable
 for_window [class="Genymotion"] floating enable
-for_window [class="Vlc"] floating enable
+for_window [class="Vlc"] floating enable border normal
 for_window [class="VirtualBox"] floating enable
 for_window [class="Thunar"] floating enable
-for_window [class="shadowsocks-qt5"] floating enable
-for_window [class="Catfish"] floating enable
 for_window [class="Xfce4-appfinder"] floating enable
+for_window [class="Pamac-manager"] floating enable
+for_window [class="Pamac-updater"] floating enable
+for_window [class="GParted"] floating enable border normal
+for_window [title="alsamixer"] floating enable border pixel 1
+for_window [class="Pavucontrol"] floating enable
+for_window [class="Lxappearance"] floating enable sticky enable border normal
+for_window [class="Nm-connection-editor"] floating enable sticky enable border normal
 
 
 #---wallpaper---
 
 # static mode
-#exec --no-startup-id feh --bg-scale "~/Pictures/Wallpapers/arch_gruvboxdark.png"
+exec feh --bg-scale ~/Pictures/Wallpapers/arch_gruvboxdark.png
 
 # random mode
-exec --no-startup-id  ~/.config/i3/wallpaper.sh &
+#exec --no-startup-id  ~/.config/i3/wallpaper.sh &
 
 # font
 font pango: Fantasque Sans Mono 10
@@ -129,7 +135,7 @@ bar {
 exec --no-startup-id /usr/bin/xrandr --output eDP-1 --primary
 
 # external display device(eDP-1 is the display device's name, use the command "xrandr" to see the display device name.)
-#exec --no-startup-id xrandr --output HDMI1 1920*1080 --right-of eDP-1
+exec --no-startup-id /usr/bin/xrandr --output HDMI-1 1366*768 --right-of eDP-1
 
 #===workspace control===
 
@@ -138,21 +144,79 @@ exec --no-startup-id /usr/bin/xrandr --output eDP-1 --primary
 #workspace "2:Web" output eDP-1
 #workspace "3:Code" output eDP-1
 #workspace "9:Mail" output eDP-1
-set $ws1 1
-set $ws2 2
-set $ws3 3
-set $ws4 4
-set $ws5 5
-set $ws6 6
-set $ws7 7
-set $ws8 8
-set $ws9 9
-set $ws10 10
+
+#set $ws1 "1: "
+#set $ws2 "2: "
+#set $ws5 "10: "
+
+workspace $workspace1 output eDP-1
+workspace $workspace2 output eDP-1
+workspace $workspace3 output eDP-1
+workspace $workspace4 output eDP-1
+workspace $workspace5 output eDP-1
+workspace $workspace6 output eDP-1
+workspace $workspace7 output eDP-1
+workspace $workspace8 output eDP-1
+workspace $workspace9 output HDMI-1
+workspace $workspace10 output HDMI-1
+
+# switch to workspace
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
+bindsym $mod+5 workspace $workspace5
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
+bindsym $mod+0 workspace $workspace10
+
+# move focused container to workspace
+bindsym $mod+Ctrl+1 move container to workspace $workspace1
+bindsym $mod+Ctrl+2 move container to workspace $workspace2
+bindsym $mod+Ctrl+3 move container to workspace $workspace3
+bindsym $mod+Ctrl+4 move container to workspace $workspace4
+bindsym $mod+Ctrl+5 move container to workspace $workspace5
+bindsym $mod+Ctrl+6 move container to workspace $workspace6
+bindsym $mod+Ctrl+7 move container to workspace $workspace7
+bindsym $mod+Ctrl+8 move container to workspace $workspace8
+bindsym $mod+Ctrl+9 move container to workspace $workspace9
+bindsym $mod+Ctrl+0 move container to workspace $workspace10
+
+# Move to workspace with focused container
+bindsym $mod+Shift+1 move container to workspace $workspace1 ; workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2 ; workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3 ; workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4 ; workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace $workspace5 ; workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6 ; workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7 ; workspace $workspace7
+bindsym $mod+Shift+8 move container to workspace $workspace8 ; workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace $workspace9 ; workspace $workspace9
+bindsym $mod+Shift+10 move container to workspace $workspace10 ; workspace $workspace10
+
+set $workspace1 "1:"
+set $workspace2 "2:"
+set $workspace3 "3:"
+set $workspace4 "4:"
+set $workspace5 "5:"
+set $workspace6 "l6"
+set $workspace7 "l7"
+set $workspace8 "l8"
+set $workspace9 "l9"
+set $workspace10 "l10"
+
 
 # putting clients on specific workspaces
-#assign [class="Chromium"] $ws1
+assign [class="Chromium"] $workspace2
+assign [class=".*firefox.*"] $workspace2
+assign [class=".*Teams.*"] $workspace4
 
-#---switch workspace---
+# Spotify doesn't play nice
+for_window [class="Spotify"] move to workspace $workspace5
+for_window [class="Firefox" title=".*WhatsApp.*"] move to workspace $workspace6
+#---switch workspace--
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
@@ -161,40 +225,6 @@ for_window [urgent=latest] focus
 bindsym mod1+Tab workspace next
 bindsym mod1+Shift+Tab workspace prev
 
-# switch to workspace
-bindsym $mod+1 workspace $ws1
-bindsym $mod+2 workspace $ws2
-bindsym $mod+3 workspace $ws3
-bindsym $mod+4 workspace $ws4
-bindsym $mod+5 workspace $ws5
-bindsym $mod+6 workspace $ws6
-bindsym $mod+7 workspace $ws7
-bindsym $mod+8 workspace $ws8
-bindsym $mod+9 workspace $ws9
-bindsym $mod+0 workspace $ws10
-
-# move focused container to workspace
-bindsym $mod+Ctrl+1 move container to workspace $ws1
-bindsym $mod+Ctrl+2 move container to workspace $ws2
-bindsym $mod+Ctrl+3 move container to workspace $ws3
-bindsym $mod+Ctrl+4 move container to workspace $ws4
-bindsym $mod+Ctrl+5 move container to workspace $ws5
-bindsym $mod+Ctrl+6 move container to workspace $ws6
-bindsym $mod+Ctrl+7 move container to workspace $ws7
-bindsym $mod+Ctrl+8 move container to workspace $ws8
-bindsym $mod+Ctrl+9 move container to workspace $ws9
-bindsym $mod+Ctrl+0 move container to workspace $ws10
-
-
-# Move to workspace with focused container
-bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
-bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
-bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
-bindsym $mod+Shift+4 move container to workspace $ws4; workspace $ws4
-bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
-bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
-bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
-bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 
 #===window control===
 
@@ -278,18 +308,34 @@ bindsym $mod+r mode "resize"
 
 #resize shortcuts (also you can use the mouse for resizing)
 mode "resize" {
-    bindsym j resize shrink width 10 px or 10 ppt
-    bindsym k resize grow height 10 px or 10 ppt
-    bindsym l resize shrink height 10 px or 10 ppt
-    bindsym semicolon resize grow width 10 px or 10 ppt
-    #same bindings, but for the arrow keys
-    bindsym Left resize shrink width 10 px or 10 ppt
-    bindsym Down resize grow height 10 px or 10 ppt
-    bindsym Up resize shrink height 10 px or 10 ppt
-    bindsym Right resize grow width 10 px or 10 ppt
-    # back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+    bindsym Shift+h resize shrink left 10 px or 10 ppt
+	bindsym h resize grow left 10 px or 10 ppt
+
+	bindsym Shift+j resize shrink down 10 px or 10 ppt
+	bindsym j resize grow down 10 px or 10 ppt
+
+	bindsym Shift+k resize shrink up 10 px or 10 ppt
+	bindsym k resize grow up 10 px or 10 ppt
+
+	bindsym Shift+l resize shrink right 10 px or 10 ppt
+	bindsym l resize grow right 10 px or 10 ppt
+
+  # same bindings, but for the arrow keys
+	bindsym Shift+Left resize shrink left 10 px or 10 ppt
+	bindsym Left resize grow left 10 px or 10 ppt
+
+	bindsym Shift+Down resize shrink down 10 px or 10 ppt
+	bindsym Down resize grow down 10 px or 10 ppt
+
+	bindsym Shift+Up resize shrink up 10 px or 10 ppt
+	bindsym Up resize grow up 10 px or 10 ppt
+
+	bindsym Shift+Right resize shrink right 10 px or 10 ppt
+	bindsym Right resize grow right 10 px or 10 ppt
+
+	# back to normal: Enter or Escape
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
 }
 
 #===brightness===
@@ -314,7 +360,7 @@ set $mode_system select: lock(L) exit(E) suspend(S) reboot(R) poweroff(P) cancel
 
 bindsym $mod+Shift+e mode "$mode_system"
 mode "$mode_system" {
-    bindsym l exec --no-startup-id i3lock -i ~/Pictures/Wallpapers/space2.png, mode "default"
+    bindsym l exec --no-startup-id i3lock -i ~/Pictures/Wallpapers/moon.png, mode "default"
     bindsym s exec --no-startup-id systemctl suspend, mode "default"
     bindsym e exec --no-startup-id i3-msg exit, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
@@ -325,7 +371,7 @@ mode "$mode_system" {
 
 # screen off | sleep | shutdown(time unit: seconds)
 #exec --no-startup-id xset dpms 300 1357 6789
-exec --no-startup-id xset dpms 30 60
+exec --no-startup-id xset dpms 120 300
 
 #===manage i3===
 
@@ -337,7 +383,7 @@ bindsym $mod+Shift+s restart
 
 # i3lock
  mode "i3lock: Return to lock/Escape to Cancel" {
-            bindsym Return mode "default" exec i3lock -I 600 -i ~/Pictures/Wallpapers/space2.png
+            bindsym Return mode "default" exec i3lock -I 600 -i ~/Pictures/Wallpapers/moon.png
             bindsym Escape mode "default"
     }
 
@@ -348,7 +394,7 @@ bindsym $mod+Shift+s restart
 #bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # vim:filetype=i3
-set $Locker /usr/bin/i3lock -e -t -i ~/Pictures/Wallpapers/space2.png
+set $Locker /usr/bin/i3lock -e -t -i ~/Pictures/Wallpapers/moon.png
 # Autostart xss-lock session daemon
 # Automatically locks your screen before suspend/hibernation and after being idle for some time. Specify the time with xset if needed.
 # The locker must be no forking, you must pass the no fork (-n) flag to i3lock here
