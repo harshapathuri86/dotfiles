@@ -8,7 +8,6 @@ set $mod Mod4
 exec --no-startup-id ~/.config/i3/keymap
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id pamac-tray
-exec --no-startup-id clipit
 exec --no-startup-id xcompmgr
 exec --no-startup-id dunst
 exec --no-startup-id volumeicon
@@ -25,13 +24,12 @@ exec --no-startup-id blueman-applet
 #===programs shortcuts===
 
 # dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run
+#bindsym $mod+d exec --no-startup-id dmenu_run
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # terminal
 bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
 
-# xfce drop down terminal
-bindsym $mod+slash exec xfce4-terminal --drop-down
 
 # browsers--firefox chromium
 #bindsym $mod+b exec firefox
@@ -45,7 +43,7 @@ bindsym Shift+Print exec "scrot -s /tmp/screenshot-$(date +%F_%T).png -e 'xclip 
 bindsym $mod+p exec --no-startup-id pcmanfm
 
 # xfce4 app finder
-#bindsym mod1+F2 exec --no-startup-id xfce4-appfinder
+bindsym $mod+slash exec --no-startup-id xfce4-appfinder
 
 # bar toggle, hide or show
 bindsym $mod+m bar mode toggle
