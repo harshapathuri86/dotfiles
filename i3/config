@@ -7,25 +7,27 @@ set $mod Mod4
 #===autostart parograms===
 exec --no-startup-id ~/.config/i3/keymap
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id pamac-tray
+#exec --no-startup-id pamac-tray
 exec --no-startup-id xcompmgr
 exec --no-startup-id dunst
 exec --no-startup-id volumeicon
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id nm-applet
+#exec --no-startup-id sh -c "rclone --vfs-cache-mode writes mount \"onedrive_IIITH\": ~/onedrive_IIITH"
 #exec --no-startup-id fcitx
 #exec --no-startup-id ibus
 #exec --no-startup-id megasync
 #exec --no-startup-id redshift
-exec --no-startup-id blueman-applet
-#exec --no-startup-id redshift-gtk
+#exec --no-startup-id blueman-applet
+exec --no-startup-id redshift-gtk
 #exec --no-startup-id ss-qt5
 
 #===programs shortcuts===
 
 # dmenu (a program launcher)
 #bindsym $mod+d exec --no-startup-id dmenu_run
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+d exec --no-startup-id rofi -show drun
 
 # terminal
 bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
@@ -40,7 +42,7 @@ bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
 bindsym Shift+Print exec "scrot -s /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
 
 # GUI file manager -- pcmanfm
-bindsym $mod+p exec --no-startup-id pcmanfm
+bindsym $mod+p exec --no-startup-id thunar
 
 # xfce4 app finder
 bindsym $mod+slash exec --no-startup-id xfce4-appfinder
@@ -57,8 +59,8 @@ gaps outer 5
 smart_gaps on
 
 # new window
-new_window none
-new_float normal
+#new_window pixel 3
+#new_float normal
 #hide_edge_borders both
 
 # window colors
@@ -73,6 +75,7 @@ client.background       #82abba
 # popups
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
+popup_during_fullscreen smart
 
 # float programs(find the programs'names in "/usr/share/applictions")
 for_window [class="Gpicview"] floating enable
@@ -82,7 +85,7 @@ for_window [class="Xarchiver"] floating enable
 for_window [class="Genymotion"] floating enable
 for_window [class="Vlc"] floating enable border normal
 for_window [class="VirtualBox"] floating enable
-for_window [class="Thunar"] floating enable
+#for_window [class="Thunar"] floating enable
 for_window [class="Xfce4-appfinder"] floating enable
 for_window [class="Pamac-manager"] floating enable
 for_window [class="Pamac-updater"] floating enable
@@ -96,9 +99,10 @@ for_window [class="Nm-connection-editor"] floating enable sticky enable border n
 #---wallpaper---
 
 # static mode
-exec feh --bg-scale ~/Pictures/Wallpapers/arch_gruvboxdark.png
+exec feh --bg-scale ~/Pictures/Wallpapers/space2.png
 
 # random mode
+#exec feh --randomize --bg-scale ~/Pictures/Wallpapers/*
 #exec --no-startup-id  ~/.config/i3/wallpaper.sh &
 
 # font
@@ -108,20 +112,21 @@ font pango: Fantasque Sans Mono 10
 bar {
 #    status_command i3status -c ~/.config/i3/i3status.conf
     status_command i3blocks -c ~/.config/i3/i3blocks.conf
-
-    position bottom
+    tray_output primary
+    #position top
     #mode hide
     workspace_buttons yes
     #output eDP-1
     #tray_output primary
     tray_padding 0
     separator_symbol "|"
+	#strip_workspace_numbers yes
 
     colors {
     #background #285477
     #statusline #dedede
     #separator #2d2d2d
-    focused_workspace #636e88 #285de7 #dedfdg
+    #focused_workspace #636e88 #285de7 #dedfdBg
     active_workspace #556677 #234567 #56ef67
     inactive_workspace #636d72 #2d2d2d #dedede
     urgent_workspace #ffffff #900000 #d23d32
@@ -207,17 +212,21 @@ set $workspace10 "l10"
 
 
 # putting clients on specific workspaces
-assign [class="Chromium"] $workspace2
-assign [class=".*firefox.*"] $workspace2
-assign [class=".*Teams.*"] $workspace4
+#assign [class="Chromium"] $workspace2
+#assign [class=".*firefox.*"] $workspace2
+#assign [class=".*Teams.*"] $workspace4
 
 # Spotify doesn't play nice
 for_window [class="Spotify"] move to workspace $workspace5
-for_window [class="Firefox" title=".*WhatsApp.*"] move to workspace $workspace6
+#for_window [class="Firefox" title=".*WhatsApp.*"] move to workspace $workspace6
 #---switch workspace--
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
+#force_display_urgency_hint 500 ms
+
+# switch to previous workspace by pressing command for present workspace
+workspace_auto_back_and_forth yes
 
 # switch to near workspace
 bindsym mod1+Tab workspace next
@@ -248,7 +257,7 @@ bindsym $mod+e layout toggle split
 # change border style
 bindsym $mod+u border none
 bindsym $mod+n border normal
-bindsym $mod+o border 1pixel
+bindsym $mod+o border pixel 1
 bindsym $mod+b border toggle
 
 #---window focus---
@@ -306,6 +315,11 @@ bindsym $mod+r mode "resize"
 
 #resize shortcuts (also you can use the mouse for resizing)
 mode "resize" {
+	# bindsym h resize shrink width 10 px or 10 ppt
+	# bindsym j resize grow height 10 px or 10 ppt
+	# bindsym k resize shrink height 10 px or 10 ppt
+	# bindsym l resize grow width 10 px or 10 ppt
+
     bindsym Shift+h resize shrink left 10 px or 10 ppt
 	bindsym h resize grow left 10 px or 10 ppt
 
@@ -356,6 +370,7 @@ bindsym XF86AudioNext exec "playerctl next"
 #===power manager===
 set $mode_system select: lock(L) exit(E) suspend(S) reboot(R) poweroff(P) cancel(Esc/Return)
 
+bindsym mod1+l exec --no-startup-id i3lock -i ~/Pictures/Wallpapers/moon.png
 bindsym $mod+Shift+e mode "$mode_system"
 mode "$mode_system" {
     bindsym l exec --no-startup-id i3lock -i ~/Pictures/Wallpapers/moon.png, mode "default"
@@ -369,7 +384,7 @@ mode "$mode_system" {
 
 # screen off | sleep | shutdown(time unit: seconds)
 #exec --no-startup-id xset dpms 300 1357 6789
-exec --no-startup-id xset dpms 120 300
+exec --no-startup-id xset dpms 180 300
 
 #===manage i3===
 
