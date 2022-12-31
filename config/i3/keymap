@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# make CapsLock behave like Ctrl:
+setxkbmap -option ctrl:nocaps
+#setxkbmap -option altwin:swap_alt_win
+# make short-pressed Ctrl behave like Escape:
+killall xcape 2>>/dev/null;xcape -e 'Control_L=Escape'

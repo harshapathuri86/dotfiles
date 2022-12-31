@@ -1,0 +1,305 @@
+# https://thevaluable.dev/i3-config-mouseless/
+
+set $exnosup exec --no-startup-id
+set $exallnosup exec_always --no-startup-id
+
+# set mod to windows key
+set $mod Mod4
+
+# font
+font pango: Iosevka 10
+
+# Autostart xss-lock session daemon
+set $Locker /usr/bin/i3lock --nofork -e -t -i ~/.config/i3/lock.png &
+$exnosup xss-lock --transfer-sleep-lock -- $Locker
+
+#===autostart programs===
+
+$exnosup ~/.config/i3/keymap  # SMART-MAP(esc+ctrl)
+#$exnosup ~/.config/i3/pipewire.sh
+#$exnosup xset -b
+$exnosup picom -bc
+$exnosup dunst
+$exnosup nm-applet
+$exnosup flameshot
+#$exnosup pasystray
+#$exnosup /usr/libexec/geoclue-2.0/demos/agent
+$exnosup redshift
+$exnosup light -N 5
+
+#==========================
+
+# popups
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="Chat"] floating enable
+for_window [window_role="task_dialog"] floating enable
+popup_during_fullscreen smart
+
+for_window [class="st-256color"] floating enable
+for_window [class="Emulator"] floating enable
+for_window [class="Xarchiver"] floating enable
+for_window [class="Vlc"] floating enable border normal
+for_window [class="VirtualBox"] floating enable
+#for_window [class="Thunar"] floating enable
+for_window [class="Xfce4-appfinder"] floating enable
+for_window [class="Pamac-manager"] floating enable
+for_window [class="Pamac-updater"] floating enable
+for_window [class="GParted"] floating enable border normal
+for_window [title="alsamixer"] floating enable border pixel 1
+for_window [class="Lxappearance"] floating enable sticky enable border normal
+for_window [class="Nm-connection-editor"] floating enable sticky enable border normal
+
+# dropdown menus
+for_window [instance="dropdown"] floating enable
+for_window [instance="dropdown"] resize set 700 400
+for_window [instance="dropdown"] move scratchpad
+for_window [instance="dropdown"] border pixel 5
+
+# for_window [class="Brave"] floating enable
+# for_window [class="Nautilus"] floating enable
+# for_window [class="Code"] floating enable
+# for_window [class="Alacritty"] floating enable
+# for_window [class="Evince"] floating enable
+# $exnosup kitty --name dropdown
+
+#===shortcuts===
+
+bindsym mod1+e exec emacsclient -a "" -c
+bindsym $mod+o exec fo
+bindsym $mod+z exec firefox
+bindsym $mod+d $exnosup dmenu_run
+bindsym $mod+shift+d $exnosup i3-dmenu-desktop
+bindsym $mod+Return $exnosup i3-sensible-terminal
+bindsym Print --release exec "flameshot gui"
+bindsym $mod+q kill
+bindsym $mod+t [instance="dropdown"] scratchpad show; [instance="dropdown"] move position 1170 750
+bindsym $mod+m bar mode toggle
+bindsym mod1+Tab workspace next
+bindsym mod1+Shift+Tab workspace prev
+bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+space floating toggle
+#bindsym mod1+F4 kill
+bindsym $mod+minus move scratchpad
+bindsym $mod+plus scratchpad show
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+bindsym $mod+u border none
+bindsym $mod+n border normal
+#bindsym $mod+o border pixel 1
+bindsym mod1+b border toggle
+bindsym $mod+space focus mode_toggle
+focus_follows_mouse yes
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+bindsym $mod+a focus parent
+bindsym $mod+c focus child
+floating_modifier $mod
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+#bindsym $mod+b split h
+bindsym $mod+v split v
+bindsym $mod+r mode "resize"
+bindsym --release button2 kill
+bindsym --whole-window $mod+button2 kill
+bindsym button3 floating toggle
+bindsym --whole-window $mod+button3 floating toggle
+
+#===workspace control===
+
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 scratchpad show
+
+# move focused container to workspace
+bindsym $mod+Ctrl+1 move container to workspace number $ws1
+bindsym $mod+Ctrl+2 move container to workspace number $ws2
+bindsym $mod+Ctrl+3 move container to workspace number $ws3
+bindsym $mod+Ctrl+4 move container to workspace number $ws4
+bindsym $mod+Ctrl+5 move container to workspace number $ws5
+bindsym $mod+Ctrl+6 move container to workspace number $ws6
+bindsym $mod+Ctrl+7 move container to workspace number $ws7
+bindsym $mod+Ctrl+8 move container to workspace number $ws8
+bindsym $mod+Ctrl+9 move container to workspace number $ws9
+
+# Move to workspace with focused container
+bindsym $mod+Shift+1 move container to workspace $ws1 ; workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2 ; workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3 ; workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4 ; workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5 ; workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6 ; workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7 ; workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8 ; workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9 ; workspace $ws9
+
+bindsym $mod+p move workspace to output right
+
+# putting clients on specific workspaces
+#assign [class="Evince"] $ws1
+#assign [class="Brave"] $ws2
+#assign [class=".*firefox.*"] $ws3
+#assign [class=".*Teams.*"] $ws8
+
+# Spotify doesn't play nice
+#for_window [class="Spotify"] move to workspace $ws9
+#for_window [class="Firefox" title=".*WhatsApp.*"] move to workspace $ws6
+#---switch workspace--
+
+# switch to workspace with urgent window automatically
+for_window [urgent=latest] focus
+force_display_urgency_hint 500 ms
+
+# switch to previous workspace by pressing command for present workspace
+workspace_auto_back_and_forth yes
+
+#resize shortcuts (also you can use the mouse for resizing)
+mode "resize" {
+
+    bindsym Shift+h resize shrink left 10 px or 10 ppt
+	bindsym h resize grow left 10 px or 10 ppt
+
+	bindsym Shift+j resize shrink down 10 px or 10 ppt
+	bindsym j resize grow down 10 px or 10 ppt
+
+	bindsym Shift+k resize shrink up 10 px or 10 ppt
+	bindsym k resize grow up 10 px or 10 ppt
+
+	bindsym Shift+l resize shrink right 10 px or 10 ppt
+	bindsym l resize grow right 10 px or 10 ppt
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
+}
+
+bar {
+    status_command i3blocks -c ~/.config/i3/i3blocks.conf
+    position top
+    tray_output primary
+    workspace_buttons yes
+    tray_padding 1
+    separator_symbol "|"
+	#strip_workspace_numbers yes
+    font pango: Iosevka Nerd Font 10
+
+    colors {
+    #background #285477
+    #statusline #dedede
+    #statusline #dedede
+    #separator #2d2d2d
+    focused_workspace #636e88 #285de7 #dedfdBg
+    active_workspace #556677 #234567 #56ef67
+    inactive_workspace #636d72 #2d2d2d #dedede
+    urgent_workspace #ffffff #900000 #d23d32
+    }
+	height 24
+}
+
+#===appearance===
+
+default_border pixel 3
+default_floating_border normal
+
+#---window style---
+
+gaps inner 4
+gaps outer -2
+smart_gaps on
+
+new_window pixel 2
+hide_edge_borders smart
+
+#  class                 border   backgr.  text  indicator  child_border
+client.focused          #4c7899  #285577  #ffffff  #2e9ef4   #285577
+client.focused_inactive #81c2d6  #5f676a  #ffffff  #484e50   #0b6e48
+client.unfocused        #c9cabb  #222222  #888888  #292d2e   #222222
+client.urgent           #2f343a  #900000  #ffffff  #199475   #900000
+client.placeholder      #a2b4ba  #0c0c0c  #ffffff  #1793d0   #0c0c0c
+client.background       #82abba
+
+exec feh --bg-scale ~/.config/i3/wall.png
+
+#exec --no-startup-id xrandr --output eDP-1 --primary
+# exec --no-startup-id xrandr --output eDP-1-1 --primary
+# exec --no-startup-id xrandr --output eDP-1 --primary  --output HDMI-1 --left-of eDP-1
+
+#===brightness===
+# XBACKLIGHT NOT WORKING using brightnessctl and xfce4-pow-man
+bindsym XF86MonBrightnessDown exec light -U 5 && pkill -RTMIN+3 i3blocks
+bindsym XF86MonBrightnessUp exec light -A 5 && pkill -RTMIN+3 i3blocks
+
+#===music control===
+bindsym XF86AudioPlay exec "playerctl play-pause"
+bindsym XF86AudioPrev exec "playerctl previous"
+bindsym XF86AudioNext exec "playerctl next"
+
+#===volume control===
+
+# Use pactl to adjust volume in PulseAudio.
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2% && pkill -RTMIN+2 i3blocks
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2% && pkill -RTMIN+2 i3blocks
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && pkill -RTMIN+1 i3blocks
+
+#===power manager===
+set $mode_system select: lock(L) exit(E) suspend(S) reboot(R) poweroff(P) cancel(Esc/Return)
+
+bindsym mod1+l exec --no-startup-id i3lock -i ~/.config/i3/lock.png
+bindsym $mod+Shift+e mode "$mode_system"
+mode "$mode_system" {
+    bindsym l exec --no-startup-id i3lock -i ~/.config/i3/lock.png , mode "default"
+    bindsym s exec --no-startup-id loginctl suspend, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym r exec --no-startup-id loginctl reboot, mode "default"
+    bindsym p exec --no-startup-id loginctl poweroff, mode "default"
+    bindsym Escape mode "default"
+	bindsym Return mode "default"
+}
+
+
+# screen off | sleep | shutdown(time unit: seconds)
+#$exallnosup xset dpms 5 10 3600
+$exallnosup xset dpms 240 360 3600
+
+# reload the configuration file
+bindsym $mod+Shift+r reload
+
+# restart i3 inplace
+bindsym $mod+Shift+s restart
+
+# i3lock
+ mode "i3lock: Return to lock/Escape to Cancel" {
+            bindsym Return mode "default" exec i3lock -I 600 -i ~/.config/i3/lock.png
+            bindsym Escape mode "default"
+    }

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+file=$(fd . $HOME --type file --exclude venv | dmenu -i -l 25)
+curl -F "file=@$file" https://0x90.pathuri.xyz | xclip -selection c
+notify-send "Copied the link to clipboard"

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+    5) light -A 2% &> /dev/null ;;
+    4) light -U 2% &> /dev/null ;;
+esac
+
+light -G

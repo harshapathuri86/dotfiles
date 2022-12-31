@@ -1,0 +1,12 @@
+Host github.com
+hostname ssh.github.com
+Port 443
+User git
+
+Host rce.iiit.ac.in
+User harsha.pathuri
+
+Host oracle
+    HostName 144.24.143.100
+    User ubuntu
+    IdentityFile ~/.ssh/ssh-key-2022-12-15.key
