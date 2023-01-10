@@ -15,7 +15,7 @@ env:
 window:
   # Window opacity as a floating point number from `0.0` to `1.0`.
   # The value `0.0` is completely transparent and `1.0` is opaque.
-  opacity: 0.90
+  opacity: 0.85
   # Window dimensions (changes require restart)
   #
   # Specified in number of columns/lines, not pixels.
@@ -80,7 +80,7 @@ window:
   # GTK theme variant (Linux/BSD only)
   #
   # Override the variant of the GTK theme. Commonly supported values are `dark` and `light`.
-  # 
+  #
   # Set this to `None` to use the default theme variant.
   #gtk_theme_variant: dark
 
@@ -108,7 +108,7 @@ font:
     family: Iosevka
 
     # The `style` can be specified to pick a specific face.
-    style: Nerd Font Complete
+    style: Nerd Font Complete Mono
 
   # Bold font face
   bold:
@@ -121,7 +121,7 @@ font:
     family: Iosevka
 
     # The `style` can be specified to pick a specific face.
-    style: Bold Nerd Font Complete
+    style: Bold Nerd Font Complete Mono
 
   # Italic font face
   italic:
@@ -131,10 +131,10 @@ font:
     # value specified for the normal font.
     # family:  MesloLGS NF
     #family:  Fantasque Sans Mono
-    family: Iosevka
+    family: VictorMono Nerd Font Mono
 
     # The `style` can be specified to pick a specific face.
-    style: Italic Nerd Font Complete
+    style: Italic
 
   # Bold italic font face
   bold_italic:
@@ -145,10 +145,10 @@ font:
     # family:  MesloLGS NF
     # family: JetBrains Mono NL
     #family:  Fantasque Sans Mono
-    family: Iosevka
+    family: VictorMono Nerd Font Mono
 
     # The `style` can be specified to pick a specific face.
-    style: Bold Italic Nerd Font Complete
+    style: Bold Italic
 
   # Point size
     size: 11.0
