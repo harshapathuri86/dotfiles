@@ -4,7 +4,7 @@ export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
 # source /opt/intel/oneapi/setvars.sh
 
 export PATH="$PATH:$HOME/.cargo/bin"
-#export PATH="$PATH:$HOME/go/bin" # added to fish using 
+#export PATH="$PATH:$HOME/go/bin" # added to fish using
 # set -Ux GOPATH $HOME/go
 # fish_add_path $GOPATH/bin
 export PATH="$PATH:$HOME/.local/bin/statusbar"
@@ -31,3 +31,11 @@ zoxide init fish | source
 export EDITOR="nvim"
 export TERMINAL="alacritty"
 export BROWSER="firefox"
+
+# Start X at login
+# https://wiki.archlinux.org/title/fish
+if status is-login
+    if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
+        exec startx -- -keeptty
+    end
+end
