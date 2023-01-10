@@ -14,6 +14,8 @@ else
 	. "$HOME/.xprofile"
 fi
 
+export $(dbus-launch)
+
 /usr/lib/geoclue-2.0/demos/agent &
 redshift &
 ssh-agent dwm
