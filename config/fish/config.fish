@@ -29,7 +29,7 @@ pyenv init - | source
 zoxide init fish | source
 
 export EDITOR="nvim"
-export TERMINAL="kitty"
+export TERMINAL="alacritty"
 export BROWSER="firefox"
 
 # Start X at login
