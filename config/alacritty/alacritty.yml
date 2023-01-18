@@ -95,7 +95,7 @@ scrolling:
 # Font configuration
 font:
   # Normal (roman) font face
-  size: 11
+  size: 12
   normal:
     # Font family
     #
@@ -105,10 +105,10 @@ font:
     #   - (Windows) Consolas
     #family: MesloLGS NF
     #family: JetBrains Mono
-    family: Iosevka
+    family: Iosevka Nerd Font Mono
 
     # The `style` can be specified to pick a specific face.
-    style: Nerd Font Complete Mono
+    style: Regular
 
   # Bold font face
   bold:
@@ -118,10 +118,10 @@ font:
     # value specified for the normal font.
     # family:  MesloLGS NF
     #family: JetBrains Mono
-    family: Iosevka
+    family: Iosevka Nerd Font Mono
 
     # The `style` can be specified to pick a specific face.
-    style: Bold Nerd Font Complete Mono
+    style: Bold
 
   # Italic font face
   italic:

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+file=$(fd . $HOME --type file --exclude venv | dmenu -i -l 25)
+
+# check if dragon-drop is installed
+if ! command -v dragon-drop &> /dev/null
+then
+    echo "dragon-drop could not be found"
+    exit
+fi
+dragon-drop -x "$file"

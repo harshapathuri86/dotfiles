@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# select a file to open using fzf
 file=$(fd . $HOME --type file --exclude venv | dmenu -i -l 25)
-curl -F "file=@$file" https://0x90.pathuri.xyz | xclip -selection c
-notify-send "Copied the link to clipboard"
+
+# send the file to the 0x0.st service
+# and copy the URL to the clipboard
+curl -F "file=@$file" https://0x0.st | xclip -selection clipboard
+
+notify-send '
+Done' --icon $HOME/Pictures/favicon-32x32.png --app-name "0x90.pathuri.xyz"
