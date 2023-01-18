@@ -21,7 +21,7 @@ local sources = {
   f.stylua,
 
   -- cpp
-  d.cpplint,
+  -- d.cpplint,
   f.clang_format,
 
   -- python

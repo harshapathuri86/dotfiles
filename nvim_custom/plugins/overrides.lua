@@ -21,8 +21,8 @@ M.mason = {
     "stylua",
 
     -- web dev stuff
-    "css-lsp",
     "html-lsp",
+    "css-lsp",
     "typescript-language-server",
     "deno",
     "tailwindcss-language-server",
@@ -32,7 +32,7 @@ M.mason = {
     -- cpp
     "clangd",
     "clang-format",
-    "cpplint",
+    -- "cpplint",
 
     -- python
     "python-lsp-server",
@@ -46,6 +46,17 @@ M.mason = {
     -- markdown
     "marksman"
 
+  },
+}
+
+-- cmp
+M.cmp = {
+  sources = {
+    { name = "nvim_lsp", keyword_length = 1 },
+    { name = "buffer"},
+    { name = "nvim_lua" },
+    { name = "path" },
+    { name = "luasnip" , keyword_length = 2 },
   },
 }
 
@@ -63,12 +74,6 @@ M.nvimtree = {
         git = true,
       },
     },
-  },
-}
-
-M.plugins = {
-  lspconfig = {
-    servers = {"clangd"},
   },
 }
 
