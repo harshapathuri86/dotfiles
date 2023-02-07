@@ -14,8 +14,10 @@ else
 	. "$HOME/.xprofile"
 fi
 
-export $(dbus-launch)
+#xrandr --setprovideroutputsource modesetting NVIDIA-0
+#xrandr --auto
 
 /usr/lib/geoclue-2.0/demos/agent &
 redshift &
-ssh-agent dwm
+# ssh-agent dwm
+exec dbus-launch --sh-syntax --exit-with-session dwm

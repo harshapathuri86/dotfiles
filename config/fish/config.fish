@@ -34,8 +34,10 @@ export BROWSER="firefox"
 
 # Start X at login
 # https://wiki.archlinux.org/title/fish
-if status is-login
-    if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
-        exec startx -- -keeptty
-    end
-end
+# if status is-login
+#     if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
+#         exec startx -- -keeptty
+#     end
+# end
+
+status --is-interactive; and pyenv virtualenv-init - | source

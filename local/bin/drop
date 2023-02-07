@@ -1,6 +1,6 @@
 #!/bin/bash
 
-file=$(fd . $HOME --type file --exclude venv | dmenu -i -l 25)
+file=$(fd . $HOME --type file --exclude venv | dmenu -i -p "drop" -l 25)
 
 # check if dragon-drop is installed
 if ! command -v dragon-drop &> /dev/null
