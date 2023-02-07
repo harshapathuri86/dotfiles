@@ -16,3 +16,9 @@
 [submodule "tmux/plugins/vim-tmux-navigator"]
 	path = tmux/plugins/vim-tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator
+[submodule "dwm"]
+	path = dwm
+	url = git@github.com:harshapathuri86/dwm.git
+[submodule "dwmblocks"]
+	path = dwmblocks
+	url = git@github.com:harshapathuri86/dwmblocks.git
