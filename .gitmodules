@@ -22,3 +22,6 @@
 [submodule "dwmblocks"]
 	path = dwmblocks
 	url = git@github.com:harshapathuri86/dwmblocks.git
+[submodule "wallpapers"]
+	path = wallpapers
+	url = git@github.com:harshapathuri86/wallpapers.git
