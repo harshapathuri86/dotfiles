@@ -22,6 +22,9 @@ require('lazy').setup({
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
 
+-- Surround
+  'tpope/vim-surround',
+
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
@@ -164,9 +167,33 @@ require('lazy').setup({
       horizontal = { location = "rightbelow", split_ratio = .3, },
       vertical = { location = "rightbelow", split_ratio = .5 },
     },
+  }, }
   },
 
-  } }
+  -- { "nvim-neorg/neorg",
+  -- build = ":Neorg sync-parsers",
+  -- opts = {
+  --     load = {
+  --         ["core.defaults"] = {}, -- Loads default behaviour
+  --         ["core.norg.concealer"] = {}, -- Adds pretty icons to your documents
+  --         ["core.norg.dirman"] = { -- Manages Neorg workspaces
+  --             config = {
+  --                 workspaces = {
+  --                     notes = "~/notes",
+  --                 },
+  --             },
+  --         },
+  --         ["core.norg.completion"] = {
+  --         config = {
+  --           engine = "nvim-cmp",
+  --         },
+  --       },
+  --     },
+  -- },
+  -- dependencies = { { "nvim-lua/plenary.nvim" } },
+  -- }
+
+
 }, {})
 
 -- [[ Setting options ]]
