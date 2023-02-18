@@ -98,8 +98,10 @@ require('lazy').setup({
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help indent_blankline.txt`
     opts = {
-      char = '┊',
       show_trailing_blankline_indent = false,
+      space_char_blankline = " ",
+      show_current_context = true,
+      show_current_context_start = true,
     },
   },
 
@@ -148,7 +150,23 @@ require('lazy').setup({
     },
   },
 
-  { "NvChad/nvterm" }
+  { "NvChad/nvterm", opts ={
+  terminals = {
+    type_opts = {
+      float = {
+        relative = 'editor',
+        row = 0.3,
+        col = 0.25,
+        width = 0.5,
+        height = 0.4,
+        border = "single",
+      },
+      horizontal = { location = "rightbelow", split_ratio = .3, },
+      vertical = { location = "rightbelow", split_ratio = .5 },
+    },
+  },
+
+  } }
 }, {})
 
 -- [[ Setting options ]]
@@ -293,24 +311,6 @@ require("nvim-tree").setup({
 
 vim.keymap.set('n', '<leader>n', require('nvim-tree').toggle, { desc = 'Nvim-tree toggle' })
 vim.keymap.set('n', '<C-n>', require('nvim-tree').toggle, { desc = 'Nvim-tree toggle' })
-
--- [[ Configure Nvterm ]]
-require("nvterm").setup({
-  terminals = {
-    type_opts = {
-      float = {
-        relative = 'editor',
-        row = 0.3,
-        col = 0.25,
-        width = 0.5,
-        height = 0.4,
-        border = "single",
-      },
-      horizontal = { location = "rightbelow", split_ratio = .3, },
-      vertical = { location = "rightbelow", split_ratio = .5 },
-    },
-  },
-})
 
 local terminal = require("nvterm.terminal")
 local toggle_modes = {'n', 't'}
@@ -599,6 +599,15 @@ cmp.setup.cmdline({ '/', '?' }, {
     { name = 'buffer' }
   }
 })
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+-- cmp.setup.cmdline(':', {
+--   mapping = cmp.mapping.preset.cmdline(),
+--   sources = cmp.config.sources({
+--     { name = 'path' }
+--   }, {
+--     { name = 'cmdline' }
+--   })
+-- })
 
 -- If you want insert `(` after select function or method item
 local cmp_autopairs = require "nvim-autopairs.completion.cmp"
