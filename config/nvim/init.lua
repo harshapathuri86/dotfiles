@@ -1,3 +1,5 @@
+---@diagnostic disable: undefined-global
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -17,18 +19,20 @@ vim.opt.rtp:prepend(lazypath)
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
+  -- install plugins
 
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
 
--- Surround
+  -- Surround
   'tpope/vim-surround',
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
-  { -- LSP Configuration & Plugins
+  {
+    -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
@@ -44,7 +48,26 @@ require('lazy').setup({
     },
   },
 
-  { -- Autocompletion
+  -- {
+  --   'zbirenbaum/copilot-cmp',
+  --   dependencies = {
+  --     {
+  --       'zbirenbaum/copilot.lua',
+  --       config = function()
+  --         require("copilot").setup({
+  --           suggestions = { enabled = false },
+  --           panel = { enabled = false },
+  --         })
+  --       end,
+  --     },
+  --   },
+  --   config = function()
+  --     require("copilot_cmp").setup()
+  --   end
+  -- },
+
+  {
+    -- Autocompletion
     'hrsh7th/nvim-cmp',
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
@@ -60,22 +83,22 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
-  { -- Adds git releated signs to the gutter, as well as utilities for managing changes
-    'lewis6991/gitsigns.nvim',
-    opts = {
-      -- See `:help gitsigns.txt`
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
-    },
+  {
+    'folke/which-key.nvim',
+    config = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 1000
+      require("which-key").setup({
+
+      })
+    end,
   },
 
-  { -- Theme inspired by Atom
+  -- Adds git releated signs to the gutter, as well as utilities for managing changes
+  { 'lewis6991/gitsigns.nvim' },
+
+  {
+    -- Theme inspired by Atom
     'navarasu/onedark.nvim',
     priority = 1000,
     config = function()
@@ -83,7 +106,8 @@ require('lazy').setup({
     end,
   },
 
-  { -- Set lualine as statusline
+  {
+    -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
     opts = {
@@ -96,7 +120,8 @@ require('lazy').setup({
     },
   },
 
-  { -- Add indentation guides even on blank lines
+  {
+    -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help indent_blankline.txt`
@@ -109,7 +134,7 @@ require('lazy').setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim',         opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   { 'nvim-telescope/telescope.nvim', version = '*', dependencies = { 'nvim-lua/plenary.nvim' } },
@@ -127,7 +152,8 @@ require('lazy').setup({
     end,
   },
 
-  { -- Highlight, edit, and navigate code
+  {
+    -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
@@ -147,54 +173,66 @@ require('lazy').setup({
   --    to get rid of the warning telling you that there are not plugins in `lua/custom/plugins/`.
   -- { import = 'custom.plugins' },
   {
-    'nvim-tree/nvim-tree.lua',
+    "nvim-tree/nvim-tree.lua",
+    version = "*",
     dependencies = {
-      { 'nvim-tree/nvim-web-devicons', opts = {} },
+      "nvim-tree/nvim-web-devicons",
     },
   },
 
-  { "NvChad/nvterm", opts ={
-  terminals = {
-    type_opts = {
-      float = {
-        relative = 'editor',
-        row = 0.3,
-        col = 0.25,
-        width = 0.5,
-        height = 0.4,
-        border = "single",
-      },
-      horizontal = { location = "rightbelow", split_ratio = .3, },
-      vertical = { location = "rightbelow", split_ratio = .5 },
-    },
-  }, }
-  },
-
-  -- { "nvim-neorg/neorg",
-  -- build = ":Neorg sync-parsers",
-  -- opts = {
-  --     load = {
-  --         ["core.defaults"] = {}, -- Loads default behaviour
-  --         ["core.norg.concealer"] = {}, -- Adds pretty icons to your documents
-  --         ["core.norg.dirman"] = { -- Manages Neorg workspaces
-  --             config = {
-  --                 workspaces = {
-  --                     notes = "~/notes",
-  --                 },
-  --             },
-  --         },
-  --         ["core.norg.completion"] = {
-  --         config = {
-  --           engine = "nvim-cmp",
-  --         },
-  --       },
-  --     },
-  -- },
-  -- dependencies = { { "nvim-lua/plenary.nvim" } },
-  -- }
+  { 'akinsho/toggleterm.nvim', version = "*", opts = { --[[ things you want to change go here]] } },
 
 
+  { "lervag/vimtex" }
 }, {})
+
+local opts = { buffer = 0 }
+
+vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
+vim.keymap.set('t', '<leader>h', [[<Cmd>wincmd h<CR>]], opts)
+vim.keymap.set('t', '<leader>j', [[<Cmd>wincmd j<CR>]], opts)
+vim.keymap.set('t', '<leader>k', [[<Cmd>wincmd k<CR>]], opts)
+vim.keymap.set('t', '<leader>l', [[<Cmd>wincmd l<CR>]], opts)
+vim.keymap.set('t', '<leader>w', [[<C-\><C-n><C-w>]], opts)
+
+vim.keymap.set({ 'n', 't' }, '<A-i>', "<cmd>ToggleTerm direction=float<cr>", { desc = "Toggle floatting terminal" })
+vim.keymap.set({ 'n', 't' }, '<A-h>', "<cmd>ToggleTerm direction=horizontal size=12<cr>",
+  { desc = "Toggle horizantal terminal" })
+vim.keymap.set({ 'n', 't' }, '<A-v>', "<cmd>ToggleTerm direction=vertical size=50<cr>",
+  { desc = "Toggle horizantal terminal" })
+vim.keymap.set({ 'n', 't' }, '<A-t>', "<cmd>ToggleTerm direction=tab<cr>", { desc = "Toggle terminal in new tab" })
+
+--latex
+vim.g['vimtex_view_method'] = 'zathura'
+vim.g['vimtex_quickfix_mode'] = 0
+
+-- Ignore mappings
+vim.g['vimtex_mappings_enabled'] = 1
+
+-- Auto Indent
+vim.g['vimtex_indent_enabled'] = 0
+
+-- Error Suppression:
+-- https://github.com/lervag/vimtex/blob/master/doc/vimtex.txt
+
+vim.g['vimtex_log_ignore'] = ({
+  'Underfull',
+  'Overfull',
+  'specifier changed to',
+  'Token not allowed in a PDF string',
+})
+
+vim.g['vimtex_context_pdf_viewer'] = 1
+vim.g['vimtex_context_pdf_viewer'] = 'evince'
+
+-- vim.g['vimtex_complete_enabled'] = 1
+-- vim.g['vimtex_compiler_progname'] = 'nvr'
+-- vim.g['vimtex_complete_close_braces'] = 1
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
@@ -271,8 +309,6 @@ vim.keymap.set('n', '<leader>l', "<C-w>l", { desc = "window right" })
 vim.keymap.set('n', '<leader>j', "<C-w>j", { desc = "window down" })
 vim.keymap.set('n', '<leader>k', "<C-w>k", { desc = "window up" })
 
--- use Q to kill window
-vim.keymap.set('n', 'Q', ':quit<CR>', { desc = "quit" })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -336,20 +372,116 @@ require("nvim-tree").setup({
   },
 })
 
-vim.keymap.set('n', '<leader>n', require('nvim-tree').toggle, { desc = 'Nvim-tree toggle' })
-vim.keymap.set('n', '<C-n>', require('nvim-tree').toggle, { desc = 'Nvim-tree toggle' })
+local api = require("nvim-tree.api")
+vim.keymap.set('n', '<C-n>', api.tree.toggle, { desc = 'Toggle Nvim Tree' })
 
-local terminal = require("nvterm.terminal")
-local toggle_modes = {'n', 't'}
-local mappings = {
-  { toggle_modes, '<A-h>', function () require("nvterm.terminal").toggle('horizontal') end },
-  { toggle_modes, '<A-v>', function () require("nvterm.terminal").toggle('vertical') end },
-  { toggle_modes, '<A-i>', function () require("nvterm.terminal").toggle('float') end },
+
+-- [[ Configure GitSigns ]]
+require('gitsigns').setup {
+  signs = {
+    add = {
+      hl = "GitSignsAdd",
+      text = "│",
+      numhl = "GitSignsAddNr",
+      linehl = "GitSignsAddLn"
+    },
+    change = {
+      hl = "GitSignsChange",
+      text = "│",
+      numhl = "GitSignsChangeNr",
+      linehl = "GitSignsChangeLn"
+    },
+    delete = {
+      hl = "GitSignsDelete",
+      text = "-",
+      numhl = "GitSignsDeleteNr",
+      linehl = "GitSignsDeleteLn"
+    },
+    topdelete = {
+      hl = "GitSignsDelete",
+      text = "‾",
+      numhl = "GitSignsDeleteNr",
+      linehl = "GitSignsDeleteLn"
+    },
+    changedelete = {
+      hl = "GitSignsChange",
+      text = "~",
+      numhl = "GitSignsChangeNr",
+      linehl = "GitSignsChangeLn"
+    },
+  },
+  signcolumn = true,
+  numhl = true,
+  linehl = false,
+  word_diff = false,
+  on_attach = function(bufnr)
+    local gs = package.loaded.gitsigns
+
+    local function map(mode, l, r, opts)
+      opts = opts or {}
+      opts.buffer = bufnr
+      vim.keymap.set(mode, l, r, opts)
+    end
+
+    -- Navigation
+    map('n', ']c', function()
+      if vim.wo.diff then return ']c' end
+      vim.schedule(function() gs.next_hunk() end)
+      return '<Ignore>'
+    end, { expr = true })
+
+    map('n', '[c', function()
+      if vim.wo.diff then return '[c' end
+      vim.schedule(function() gs.prev_hunk() end)
+      return '<Ignore>'
+    end, { expr = true })
+
+    -- Actions
+    map({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<CR>')
+    map({ 'n', 'v' }, '<leader>hr', ':Gitsigns reset_hunk<CR>')
+    map('n', '<leader>hS', gs.stage_buffer)
+    map('n', '<leader>hu', gs.undo_stage_hunk)
+    map('n', '<leader>hR', gs.reset_buffer)
+    map('n', '<leader>hp', gs.preview_hunk)
+    map('n', '<leader>hb', function() gs.blame_line { full = true } end)
+    map('n', '<leader>tb', gs.toggle_current_line_blame)
+    map('n', '<leader>hd', gs.diffthis)
+    map('n', '<leader>hD', function() gs.diffthis('~') end)
+    map('n', '<leader>td', gs.toggle_deleted)
+
+    -- Text object
+    map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+  end,
+  watch_gitdir = {
+    interval = 2000,
+    follow_files = true,
+  },
+  attach_to_untracked = false,
+  current_line_blame = true,
+  current_line_blame_opts = {
+    virt_text = true,
+    virt_text_pos = "eol",
+    delay = 1000,
+  },
+  current_line_blame_formatter_opts = {
+    relative_time = true,
+  },
+  sign_priority = 6,
+  update_debounce = 100,
+  status_formatter = nil,
+  max_file_length = 40000,
+  preview_config = {
+    border = "single",
+    style = "minimal",
+    relative = "cursor",
+    row = 0,
+    col = 1,
+  },
+  yadm = {
+    enable = false,
+  },
 }
-local opts = { noremap = true, silent = true }
-for _, mapping in ipairs(mappings) do
-  vim.keymap.set(mapping[1], mapping[2], mapping[3], opts)
-end
+
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
@@ -383,6 +515,7 @@ vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set('n', '<leader>sk', require('telescope.builtin').keymaps, { desc = '[S]earch [K]eys' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -507,12 +640,12 @@ end
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
+  ltex = {},
   clangd = {},
   gopls = {},
   pyright = {},
   rust_analyzer = {},
   tsserver = {},
-
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
@@ -553,6 +686,13 @@ local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 local lspkind = require 'lspkind'
 
+lspkind.init({
+  symbol_map = {
+    Copilot = "",
+  },
+})
+vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+
 -- luasnip.config.setup {}
 require("luasnip").config.set_config({ history = true, updateevents = "TextChanged,TextChangedI" })
 -- lazy load snippets from friendly-snippets to luasnip
@@ -569,7 +709,6 @@ cmp.setup {
       mode = 'symbol_text', -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
       max_width = 50,
       ellipsis_char = '...',
-
     })
   },
   mapping = cmp.mapping.preset.insert {
@@ -600,32 +739,33 @@ cmp.setup {
     end, { 'i', 's' }),
   },
   sources = {
+    { name = 'copilot' },
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
     { name = 'nvim_lsp_signature_help' },
     { name = 'buffer' },
     { name = 'path' },
   },
-  experimental = { ghost_text = false },
+  experimental = { ghost_text = true },
   enabled = function()
-      -- disable completion in comments
-      local context = require 'cmp.config.context'
-      -- keep command mode completion enabled when cursor is in a comment
-      if vim.api.nvim_get_mode().mode == 'c' then
-        return true
-      else
-        return not context.in_treesitter_capture("comment")
+    -- disable completion in comments
+    local context = require 'cmp.config.context'
+    -- keep command mode completion enabled when cursor is in a comment
+    if vim.api.nvim_get_mode().mode == 'c' then
+      return true
+    else
+      return not context.in_treesitter_capture("comment")
           and not context.in_syntax_group("Comment")
-      end
     end
+  end
 }
 
-cmp.setup.cmdline({ '/', '?' }, {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = {
-    { name = 'buffer' }
-  }
-})
+-- cmp.setup.cmdline({ '/', '?' }, {
+--   mapping = cmp.mapping.preset.cmdline(),
+--   sources = {
+--     { name = 'buffer' }
+--   }
+-- })
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 -- cmp.setup.cmdline(':', {
 --   mapping = cmp.mapping.preset.cmdline(),
@@ -639,6 +779,8 @@ cmp.setup.cmdline({ '/', '?' }, {
 -- If you want insert `(` after select function or method item
 local cmp_autopairs = require "nvim-autopairs.completion.cmp"
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+
+vim.opt.formatoptions = vim.opt.formatoptions - { "c", "r", "o" }
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
