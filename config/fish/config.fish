@@ -25,7 +25,10 @@ alias em='emacsclient --tty'
 alias g="git"
 alias p="pacman"
 
-pyenv init - | source
+alias rpall="sudo pacman -R $(pacman -Qtdq)"
+# sudo pacman -R $(pacman -Qqs package_name)
+
+# pyenv init - | source
 zoxide init fish | source
 
 export EDITOR="nvim"
@@ -40,4 +43,5 @@ export BROWSER="firefox"
 #     end
 # end
 
-status --is-interactive; and pyenv virtualenv-init - | source
+# status --is-interactive; and pyenv virtualenv-init - | source
+# export MPD_HOST=$HOME/.config/mpd/socket
