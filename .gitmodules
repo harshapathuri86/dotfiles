@@ -25,3 +25,6 @@
 [submodule "wallpapers"]
 	path = wallpapers
 	url = git@github.com:harshapathuri86/wallpapers.git
+[submodule "config/nvim"]
+	path = config/nvim
+	url = git@github.com:harshapathuri86/nvim.git
