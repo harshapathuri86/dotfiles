@@ -45,3 +45,5 @@ export BROWSER="firefox"
 
 # status --is-interactive; and pyenv virtualenv-init - | source
 # export MPD_HOST=$HOME/.config/mpd/socket
+
+set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin $PATH /home/harsha/.ghcup/bin # ghcup-env
