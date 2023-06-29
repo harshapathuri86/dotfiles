@@ -1,5 +1,4 @@
 export PATH="$PATH:$HOME/.local/bin"
-export PATH="$PATH:$HOME/.emacs.d/bin"
 export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
 # source /opt/intel/oneapi/setvars.sh
 
@@ -19,9 +18,6 @@ alias grep="grep --color=auto"
 alias diff="diff --color=auto"
 alias ip="ip -color=auto"
 
-alias em='emacsclient --tty'
-#alias ema='emacsclient --create-frame --no-wait'
-#alias lf='lfub'
 alias g="git"
 alias p="pacman"
 
@@ -47,3 +43,7 @@ export BROWSER="firefox"
 # export MPD_HOST=$HOME/.config/mpd/socket
 
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin $PATH /home/harsha/.ghcup/bin # ghcup-env
+
+# if test "$TERM" = "xterm-kitty"
+#     alias ssh "kitty +kitten ssh"
+# end

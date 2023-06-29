@@ -14,8 +14,8 @@ else
 	. "$HOME/.xprofile"
 fi
 
-#xrandr --setprovideroutputsource modesetting NVIDIA-0
-#xrandr --auto
+xrandr --setprovideroutputsource modesetting NVIDIA-0
+xrandr --auto
 
 /usr/lib/geoclue-2.0/demos/agent &
 redshift &
