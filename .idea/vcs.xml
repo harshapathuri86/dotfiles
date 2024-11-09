@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/config/nvim" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/dwm" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/dwmblocks" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/tmux/plugins/srcery-tmux" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/tmux/plugins/tmux-prefix-highlight" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/tmux/plugins/tmux-resurrect" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/tmux/plugins/tmux-resurrect/lib/tmux-test" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/tmux/plugins/tmux-sensible" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/tmux/plugins/tpm" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/tmux/plugins/tpm/lib/tmux-test" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/tmux/plugins/vim-tmux-navigator" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/wallpapers" vcs="Git" />
+  </component>
+</project>

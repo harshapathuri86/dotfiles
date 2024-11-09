@@ -1,12 +1,63 @@
-Host github.com
-hostname ssh.github.com
-Port 443
-User git
+Include ~/.orbstack/ssh/config
+
+Include /Users/sri.harsha/.colima/ssh_config
+
+# DevSpace Start autocollectsvc.autocollectsvc.devspace
+Host autocollectsvc.autocollectsvc.devspace
+  HostName localhost
+  LogLevel error
+  Port 10611
+  IdentityFile "/Users/sri.harsha/.devspace/ssh/id_devspace_ecdsa"
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+  User devspace
+# DevSpace End autocollectsvc.autocollectsvc.devspace
+
+Host * ServerAliveInterval 180
+
+
+# Host github.com
+# hostname ssh.github.com
+# Port 443
+# User git
 
 Host rce.iiit.ac.in
 User harsha.pathuri
 
-Host oracle
+Host ada
+User aforakhilesh
+hostname ada.iiit.ac.in
+ # Akhilesh@2.0
+
+# Host phone
+# Hostname 192.168.55.104
+# Port 8022
+# User u0_a737
+
+Host oracleip
+    # public ip
     HostName 144.24.143.100
     User ubuntu
-    IdentityFile ~/.ssh/ssh-key-2022-12-15.key
+    # IdentityFile ~/.ssh/oracle.key
+
+# using tailscale so no ip: server mapped to oracle in tailscale
+Host oracle
+    # public ip
+    # HostName 144.24.143.100
+    User ubuntu
+    IdentityFile ~/.ssh/oracle.key
+
+Host dlibre
+    # public ip
+    HostName 144.24.140.57
+    User ubuntu
+
+
+Host android
+    Hostname android
+    User u0_a737
+    Port 8022
+
+Host aiish
+    Hostname aiish-iiith
+    User sda
