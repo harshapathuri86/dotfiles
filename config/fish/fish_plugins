@@ -1,5 +1,6 @@
 jorgebucaran/fisher
-jethrokuan/z
 oh-my-fish/plugin-bang-bang
-edc/bass
 jorgebucaran/nvm.fish
+patrickf1/fzf.fish
+jorgebucaran/spark.fish
+reitzig/sdkman-for-fish@v2.1.0
