@@ -1,9 +1,10 @@
 #!/bin/bash
+# Set up PATH for the login environment
+export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
 # Check if we're already in a tmux session
 if [ -n "$TMUX" ]; then
-    echo "Already in a tmux session"
-    exit 0
+    exec fish
 fi
 
 # Get list of existing sessions
@@ -43,3 +44,6 @@ else
         fi
     fi
 fi
+
+# After tmux exits, start fish
+exec fish

@@ -10,3 +10,4 @@ window-inherit-font-size = false
 background-opacity = 0.70
 window-inherit-font-size
 shell-integration = fish
+command = ~/.tmux/tmux-session-launcher.sh

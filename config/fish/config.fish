@@ -30,11 +30,10 @@ fish_add_path "/Users/harsha/.local/bin"
 
 alias claude="/Users/harsha/.claude/local/claude"
 
-# nvm - auto use lts
-nvm use lts --silent
-
-# Auto-start tmux with session selector if not already in tmux
-if status is-interactive; and not set -q TMUX
-    ~/.tmux/session-selector.sh
+# nvm - ensure it's available in all sessions including tmux
+if test -d ~/.local/share/nvm
+    set -gx NVM_DIR ~/.local/share/nvm
+    nvm use lts --silent
 end
+
 
