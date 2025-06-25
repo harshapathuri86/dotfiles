@@ -142,29 +142,23 @@ else
     echo -e "${YELLOW}⚠️  Python3 not found, install it manually if needed${NC}"
 fi
 
-# Set Fish as default shell
-echo -e "${BLUE}🐟 Setting Fish as default shell...${NC}"
-if [[ "$SHELL" != *"fish"* ]]; then
-    # Add fish to shells if not already there
-    if ! grep -q "$(which fish)" /etc/shells; then
-        echo "$(which fish)" | sudo tee -a /etc/shells
-    fi
-    
-    # Change default shell
-    chsh -s "$(which fish)"
-    echo -e "${GREEN}✅ Fish set as default shell${NC}"
-else
-    echo -e "${GREEN}✅ Fish is already the default shell${NC}"
-fi
+# Note about Fish shell
+echo -e "${BLUE}🐟 Fish shell installed${NC}"
+echo -e "${YELLOW}ℹ️  To set Fish as default shell, run:${NC}"
+echo -e "  echo \$(which fish) | sudo tee -a /etc/shells"
+echo -e "  chsh -s \$(which fish)"
 
 echo
 echo -e "${GREEN}🎉 Installation complete!${NC}"
 echo
 echo -e "${YELLOW}📝 Next steps:${NC}"
-echo "  1. Restart your terminal or start a new session"
-echo "  2. Run the setup script: ./mac-setup.sh"
-echo "  3. Install tmux plugins: Ctrl-a + I"
-echo "  4. Restart skhd: brew services start skhd"
+echo "  1. Set Fish as default shell (commands shown above)"
+echo "  2. Restart your terminal or start a new session"
+echo "  3. Run the setup script: ./mac-setup.sh"
+echo "  4. Install tmux plugins: Ctrl-a + I"
+echo
+echo -e "${YELLOW}🔧 Services to start manually (if needed):${NC}"
+echo "  • skhd (hotkey daemon): brew services start skhd"
 echo
 echo -e "${BLUE}ℹ️  Installed tools:${NC}"
 echo "  • Homebrew (package manager)"
