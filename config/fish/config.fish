@@ -1,8 +1,6 @@
-zoxide init fish | source
-
 set EDITOR "$(which nvim)"
 
-source $HOME/.venv/bin/activate.fish
+source $HOME/venv/bin/activate.fish
 
 alias v 'nvim'
 alias vl 'nvim leetcode.nvim'
@@ -26,3 +24,17 @@ alias jumpcloud "echo passwd | totp-cli g --show-remaining cashfree jumpcloud | 
 alias vpn "echo passwd | totp-cli g --show-remaining cashfree vpn | cut -d ' ' -f 1 | tr -d '\n' | pbcopy"
 alias cashfree "echo passwd | totp-cli g --show-remaining cashfree $argv[1] | cut -d ' ' -f 1 | tr -d '\n' | pbcopy"
 alias k "kubectl --insecure-skip-tls-verify "
+
+# uv
+fish_add_path "/Users/harsha/.local/bin"
+
+alias claude="/Users/harsha/.claude/local/claude"
+
+# nvm - auto use lts
+nvm use lts --silent
+
+# Auto-start tmux with session selector if not already in tmux
+if status is-interactive; and not set -q TMUX
+    ~/.tmux/session-selector.sh
+end
+
