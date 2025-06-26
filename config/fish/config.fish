@@ -1,6 +1,10 @@
 set EDITOR "$(which nvim)"
 
-source $HOME/venv/bin/activate.fish
+if test -f $HOME/venv/bin/activate.fish
+    source $HOME/venv/bin/activate.fish
+else if test -f $HOME/.venv/bin/activate.fish
+    source $HOME/.venv/bin/activate.fish
+end
 
 alias v 'nvim'
 alias vl 'nvim leetcode.nvim'
